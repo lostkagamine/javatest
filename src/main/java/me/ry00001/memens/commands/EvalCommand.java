@@ -13,6 +13,7 @@ public class EvalCommand extends Command {
     public EvalCommand(Bot bot) {
         this.bot = bot;
         this.name = "eval";
+        this.description = "Runs arbitrary javascript";
     }
 
     @Override
@@ -27,6 +28,7 @@ public class EvalCommand extends Command {
         nashorn.put("logger", logger);
         try {
             Object a = nashorn.eval(StringUtils.join(args, " "));
+            if (a == null) a = "No output";
             event.getChannel().sendMessage("```"+a.toString()+"```").queue();
         } catch(ScriptException e) {
             event.getChannel().sendMessage("error: ```"+e.toString()+"```").queue();

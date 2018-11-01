@@ -17,6 +17,7 @@ public class PingCommand extends Command {
     public PingCommand(Bot bot) {
         this.name = "ping";
         this.bot = bot;
+        this.description = "what do you think this is";
     }
 
     public void run(MessageReceivedEvent event, LinkedList<String> args) {

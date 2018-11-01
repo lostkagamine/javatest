@@ -111,6 +111,7 @@ public class Bot extends ListenerAdapter {
         LinkedList<String> ll = new LinkedList<String>(Arrays.asList(split));
         String cmdname = ll.removeFirst();
         Command cmd = this.commands.get(cmdname);
+        if (cmd == null) return;
         try {
             cmd.run(event, ll);
         } catch(Throwable e) {
