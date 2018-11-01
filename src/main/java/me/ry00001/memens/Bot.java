@@ -42,7 +42,7 @@ public class Bot extends ListenerAdapter {
             this.config = reader.read();
         } catch (IOException e) {
             logger.error("oopsie whoopsie, something died while reading config.");
-            logger.error("valve, pls fix.");
+            logger.error("valve, pls fix."); // test
             logger.error(e.toString());
             System.exit(1);
         }
@@ -76,7 +76,7 @@ public class Bot extends ListenerAdapter {
                 .setAudioSendFactory(new NativeAudioSendFactory()) // JDA-NAS
                 .setAudioEnabled(true)
                 .addEventListener(this)
-                .buildBlocking();
+                .build().awaitReady();
         } catch (InterruptedException|LoginException e) {
             logger.error("can't log in!");
             logger.error("valve, pls fix.");
