@@ -61,4 +61,6 @@ gradle-app.setting
 target/
 bin/
 
+config.json
+
 # End of https://www.gitignore.io/api/java,maven,visualstudiocode

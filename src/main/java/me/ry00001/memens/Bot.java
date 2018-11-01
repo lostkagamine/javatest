@@ -89,6 +89,12 @@ public class Bot extends ListenerAdapter {
         new Bot().buildJdaAndStart();
     }
 
+    public void shutdown() {
+        logger.info("Shutting down.");
+        this.jda.shutdown();
+        System.exit(0);
+    }
+
     @Override
     public void onReady(ReadyEvent event) {
         logger.info("ok]");
@@ -105,6 +111,11 @@ public class Bot extends ListenerAdapter {
         LinkedList<String> ll = new LinkedList<String>(Arrays.asList(split));
         String cmdname = ll.removeFirst();
         Command cmd = this.commands.get(cmdname);
-        cmd.run(event, ll);
+        try {
+            cmd.run(event, ll);
+        } catch(Throwable e) {
+            logger.error("ERROR in command "+cmdname);
+            logger.error(e.toString());
+        }
     }
 }
