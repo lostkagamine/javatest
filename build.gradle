@@ -10,6 +10,7 @@ mainClassName = 'me.ry00001.memens.Bot'
 group = 'me.ry00001'
 version = '0.1'
 compileJava.options.encoding = 'UTF-8'
+compileJava.options.incremental = true // the secret sauce
 
 description = """"""
 
