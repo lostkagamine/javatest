@@ -1,22 +1,27 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+plugins {
+    id 'java'
+    id 'maven'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+mainClassName = 'me.ry00001.memens.Bot'
 
 group = 'me.ry00001'
 version = '0.1'
+compileJava.options.encoding = 'UTF-8'
 
 description = """"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
-
 repositories {
-        
-     maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-     maven { url "http://jcenter.bintray.com" }
-     maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    maven { url "http://jcenter.bintray.com" }
+    maven { url "http://repo.maven.apache.org/maven2" }
 }
+
 dependencies {
     compile group: 'net.dv8tion', name: 'JDA', version:'3.8.1_439'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.9.6'
