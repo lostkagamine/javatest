@@ -113,7 +113,7 @@ public class Bot extends ListenerAdapter {
         long gid = guild.getIdLong();
         GuildAudioHandler handler = guildManagers.get(gid);
         if (handler == null) {
-            handler = new GuildAudioHandler(manager);
+            handler = new GuildAudioHandler(manager, guild);
             guildManagers.put(gid, handler);
         }
         guild.getAudioManager().setSendingHandler(handler.getHandler());
@@ -127,6 +127,7 @@ public class Bot extends ListenerAdapter {
             @Override
             public void trackLoaded(AudioTrack track) {
                 AudioTrackInfo info = track.getInfo();
+                logger.info(String.format("queueing track %s on guild %s", info.title, ch.getGuild().getName()));
                 ch.sendMessage(String.format("Queueing `%s`...", info.title)).queue();
                 play(ch.getGuild(), h, track);
             }
@@ -167,8 +168,12 @@ public class Bot extends ListenerAdapter {
     private static void connectToFirstVoiceChannel(AudioManager mgr) {
         if (!mgr.isConnected() && !mgr.isAttemptingToConnect()) {
             for (VoiceChannel ch : mgr.getGuild().getVoiceChannels()) {
-                mgr.openAudioConnection(ch);
-                break;
+                try {
+                    mgr.openAudioConnection(ch);
+                    break;
+                } catch(Exception e) {
+
+                }
             }
         }
     }

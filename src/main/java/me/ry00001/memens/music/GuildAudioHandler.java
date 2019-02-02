@@ -2,16 +2,17 @@ package me.ry00001.memens.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import net.dv8tion.jda.core.entities.Guild;
 
 public class GuildAudioHandler {
     public final AudioPlayer player;
     public final TrackScheduler sched;
     public final AudioPlayerManager manager;
 
-    public GuildAudioHandler(AudioPlayerManager m) {
+    public GuildAudioHandler(AudioPlayerManager m, Guild guild) {
         manager = m;
         player = m.createPlayer();
-        sched = new TrackScheduler(player);
+        sched = new TrackScheduler(player, guild);
         player.addListener(sched);
     }
 
