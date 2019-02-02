@@ -6,6 +6,8 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import me.ry00001.memens.Bot;
 import me.ry00001.memens.core.Command;
 import me.ry00001.memens.music.GuildAudioHandler;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class NowPlayingCommand extends Command {
@@ -25,6 +27,12 @@ public class NowPlayingCommand extends Command {
             evt.getChannel().sendMessage("Nothing is playing.").queue();
             return;
         }
-        evt.getChannel().sendMessage(String.format("Now playing: `%s` by `%s`.", trk.getInfo().title, trk.getInfo().author)).queue();
+        String title = trk.getInfo().title;
+        String author = trk.getInfo().author;
+        MessageEmbed embed = new EmbedBuilder()
+            .setTitle("Now playing")
+            .addField(title, String.format("(by %s)", author), false)
+            .build();
+        evt.getChannel().sendMessage(embed).queue();
     }
 }
